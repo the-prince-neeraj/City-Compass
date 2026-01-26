@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>CITY COMPASS</title>
-    
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,17 +11,17 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Configuration for Custom Palette -->
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        deepBlue: '#03045E',  /* Text, Headers */
-                        oceanBlue: '#0077B6', /* Primary Buttons */
-                        skyBlue: '#00B4D8',   /* Accents */
-                        lightSky: '#90E0EF',  /* Secondary Backgrounds */
-                        paleWater: '#CAF0F8', /* Main Background */
+                        deepBlue: '#03045E',
+                        oceanBlue: '#0077B6',
+                        skyBlue: '#00B4D8',
+                        lightSky: '#90E0EF',
+                        paleWater: '#CAF0F8',
                     }
                 }
             }
@@ -40,75 +29,17 @@
     </script>
 
     <style>
-        /* --- CSS SECTION --- */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #CAF0F8; /* paleWater */
-            color: #03045E; /* deepBlue */
-            overflow-x: hidden;
-        }
-
-        /* Hero Gradient */
-        .hero-bg {
-            background: linear-gradient(135deg, #03045E 0%, #0077B6 100%);
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
-        }
-
-        /* Input Styling */
-        .custom-input {
-            border: 2px solid #90E0EF;
-            transition: all 0.3s ease;
-        }
-        .custom-input:focus {
-            border-color: #0077B6;
-            box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
-        }
-
-        /* Scrollbar */
-        .suggestions-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .suggestions-list::-webkit-scrollbar-track {
-            background: #CAF0F8;
-        }
-        .suggestions-list::-webkit-scrollbar-thumb {
-            background: #00B4D8;
-            border-radius: 3px;
-        }
-
-        /* Animation Overlay */
-        #animation-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #CAF0F8;
-            z-index: 50;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Bus Marker Animation - REMOVED since map is gone */
-        /* Card Hover */
-        .bus-card {
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-left: 5px solid #0077B6;
-        }
-        .bus-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px -5px rgba(3, 4, 94, 0.15);
-        }
-        
-        /* Stop Marker Style */
-        .via-stops span:not(:last-child)::after {
-            content: "•";
-            margin: 0 6px;
-            color: #00B4D8;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: #CAF0F8; color: #03045E; overflow-x: hidden; }
+        .hero-bg { background: linear-gradient(135deg, #03045E 0%, #0077B6 100%); border-bottom-left-radius: 50px; border-bottom-right-radius: 50px; }
+        .custom-input { border: 2px solid #90E0EF; transition: all 0.3s ease; }
+        .custom-input:focus { border-color: #0077B6; box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1); }
+        .suggestions-list::-webkit-scrollbar { width: 6px; }
+        .suggestions-list::-webkit-scrollbar-track { background: #CAF0F8; }
+        .suggestions-list::-webkit-scrollbar-thumb { background: #00B4D8; border-radius: 3px; }
+        #animation-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #CAF0F8; z-index: 50; display: none; flex-direction: column; align-items: center; justify-content: center; }
+        .bus-card { transition: transform 0.2s, box-shadow 0.2s; border-left: 5px solid #0077B6; }
+        .bus-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(3, 4, 94, 0.15); }
+        .via-stops span:not(:last-child)::after { content: "•"; margin: 0 6px; color: #00B4D8; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -117,7 +48,6 @@
     <nav class="bg-white shadow-md p-4 sticky top-0 z-40">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <!-- Compass Icon in Ocean Blue -->
                 <i class="fa-solid fa-compass text-oceanBlue text-3xl"></i>
                 <h1 class="text-xl font-bold text-deepBlue tracking-wide">CITY COMPASS</h1>
             </div>
@@ -162,7 +92,7 @@
                         <label class="block text-deepBlue text-sm font-bold mb-2">
                             <i class="fa-solid fa-location-dot text-red-500 mr-2"></i>To Location
                         </label>
-                        <input type="text" id="to-input" placeholder="e.g. Kumaraswamy Layout" autocomplete="off"
+                        <input type="text" id="to-input" placeholder="e.g. Jaya Prakash Nagar" autocomplete="off"
                             class="w-full px-4 py-3 rounded-xl custom-input focus:outline-none text-gray-700 bg-paleWater">
                         <ul id="to-suggestions" class="suggestions-list absolute w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-60 overflow-y-auto hidden z-20"></ul>
                     </div>
@@ -186,21 +116,21 @@
             <div class="container mx-auto mt-12 px-4">
                 <h3 class="text-xl font-bold text-deepBlue mb-6 text-center border-b-2 border-skyBlue inline-block mx-auto pb-1">Frequent Routes</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Kumaraswamy Layout')">
-                        <span class="block text-oceanBlue font-extrabold text-xl">210N</span>
-                        <span class="text-xs text-gray-500">KBS - KS Layout</span>
+                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Jaya Prakash Nagar 6th Phase')">
+                        <span class="block text-oceanBlue font-extrabold text-xl">215H</span>
+                        <span class="text-xs text-gray-500">KBS - JP Nagar</span>
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Hebbala', 'Central Silk Board')">
                         <span class="block text-oceanBlue font-extrabold text-xl">500D</span>
                         <span class="text-xs text-gray-500">Hebbal - Silk Board</span>
                     </div>
-                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Yelahanka')">
-                        <span class="block text-oceanBlue font-extrabold text-xl">284</span>
-                        <span class="text-xs text-gray-500">KBS - Yelahanka</span>
+                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Koramangala TTMC')">
+                        <span class="block text-oceanBlue font-extrabold text-xl">171</span>
+                        <span class="text-xs text-gray-500">KBS - Koramangala</span>
                     </div>
-                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Nelamangala')">
-                        <span class="block text-oceanBlue font-extrabold text-xl">258C</span>
-                        <span class="text-xs text-gray-500">KBS - Nelamangala</span>
+                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Whitefield')">
+                        <span class="block text-oceanBlue font-extrabold text-xl">335E</span>
+                        <span class="text-xs text-gray-500">KBS - Whitefield</span>
                     </div>
                 </div>
             </div>
@@ -224,7 +154,7 @@
                     </div>
                     <div class="mt-4 md:mt-0">
                          <span class="animate-pulse inline-flex items-center gap-1 bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full border border-green-200">
-                            <span class="w-2 h-2 bg-green-500 rounded-full"></span> Live GPS Data
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span> Live Schedule
                          </span>
                     </div>
                 </div>
@@ -263,7 +193,7 @@
         <canvas id="routeCanvas" width="800" height="400" class="w-full max-w-3xl"></canvas>
     </div>
 
-    <!-- TRACKING MODAL (UPDATED: List Only, No Map Embed) -->
+    <!-- TRACKING MODAL -->
     <div id="tracking-modal" class="fixed inset-0 bg-deepBlue bg-opacity-80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-2xl w-full max-w-3xl h-[85vh] flex flex-col shadow-2xl overflow-hidden">
             
@@ -275,7 +205,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-xl text-deepBlue" id="modal-bus-name">Route Schedule</h3>
-                        <p class="text-sm text-oceanBlue font-medium">Estimated Arrival Times</p>
+                        <p class="text-sm text-oceanBlue font-medium">Next Departure: <span id="modal-next-bus" class="font-bold text-deepBlue">--:--</span></p>
                     </div>
                 </div>
                 <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-white hover:bg-red-50 text-gray-400 hover:text-red-500 transition flex items-center justify-center shadow-md">
@@ -304,195 +234,143 @@
 
     <!-- --- JAVASCRIPT SECTION --- -->
     <script>
-        // --- EXPANDED DATA from OFFICIAL BMTC SOURCES ---
-        const locations = [
-            // Major Terminals
-            "Kempegowda Bus Station", "Shivajinagara Bus Station", "K R Market", 
-            "Banashankari TTMC", "Central Silk Board", "Yeshawanthapura TTMC", 
-            "Vijayanagara TTMC", "Shanthinagara TTMC",
-            
-            // Areas & Stops
-            "Hebbala", "Whitefield", "Electronic City", "Jaya Prakash Nagar", "BTM Layout", 
-            "Marathahalli", "Yelahanka", "Kadugodi", "Attibele", "Sarjapura", "Hosakote", 
-            "Bannerughatta Road", "Jayanagar 4th Block", "Marenahalli", "Vidyaranyapura",
-            "Kumaraswamy Layout", "Uttarahalli", "Jambu Savari Dinne", "Anjanapura",
-            "Nelamangala", "Bidadi", "Anekal", "Jigani", "Hesaraghatta", "Devanahalli",
-            "Chikkabanavara", "Peenya", "Tavarakere", "Ramakrishna Hegde Nagara",
-            "Bagaluru", "Kannuru", "K R Puram", "Kalyananagara", "Channasandra",
-            "Rameshnagara", "Budigere", "Yelahanka New Town", "Harohalli",
-            "Gottigere", "Mekhri Circle", "Richmond Circle", "Domlur", "Koramangala",
-            
-            // Specific Stops from Data
-            "Dayananda Sagar College", "Kadirenahalli Cross", "Kumaraswamy Layout Police Station",
-            "Pipelines", "Geological Survey", "ISRO Layout", "Konanakunte Cross",
-            "Padmanabha Nagara", "Chikkalasandra", "Hanumanthanagar",
-            "Tin Factory", "Kasturi Nagar", "Hennur Junction", "Nagavara", "Manyata Tech Park",
-            "Bellandur", "Eco Space", "Devarabisanahalli", "New Horizon College",
-            "Kadubisanahalli", "Karthik Nagara", "Doddanekkundi", "Mahadevapura",
-            
-            // Hospitals (Destinations)
-            "Apollo Hospital", "Supra Hospital", "Rajarajeshwari Hospital", 
-            "Devanahalli General Hospital", "Ambedkar Medical College", 
-            "Hosakote General Hospital", "Vaidehi Hospital", "Nelamangala General Hospital", 
-            "Sapthagiri Medical College", "Sakra Hospital",
-            "Kempegowda International Airport"
-        ].sort();
+        // --- HELPER TO GENERATE HIGH FREQUENCY TIMINGS ---
+        function generateTimings(startHour, endHour, intervalMinutes) {
+            const timings = [];
+            for (let h = startHour; h <= endHour; h++) {
+                for (let m = 0; m < 60; m += intervalMinutes) {
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    const displayH = h % 12;
+                    const finalH = displayH === 0 ? 12 : displayH; 
+                    const displayM = m.toString().padStart(2, '0');
+                    timings.push(`${finalH.toString().padStart(2, '0')}:${displayM} ${ampm}`);
+                }
+            }
+            return timings;
+        }
 
-        // FULL DATABASE
+        // --- EXPANDED BUS DATABASE (Includes JP Nagar & Main Residential Areas) ---
         const busRoutes = [
-            // --- KEMPEGOWDA BUS STATION (KBS) ROUTES ---
+            // --- SOUTH BANGALORE (JP Nagar, Jayanagar, BTM) ---
             { 
+                id: "215H", type: "Ordinary", 
+                stops: ["Kempegowda Bus Station", "Corporation", "Lalbagh Main Gate", "South End Circle", "Jayanagar 4th Block", "Jayanagar 5th Block", "Jaya Prakash Nagar 1st Phase", "Jaya Prakash Nagar 6th Phase", "Puttenahalli", "Konanakunte Cross", "Jambu Savari Dinne"], 
+                timings: generateTimings(6, 22, 10)
+            },
+            {
+                id: "201", type: "Ordinary",
+                stops: ["Srinagar", "Hanumanthnagar", "Gandhi Bazaar", "Jayanagar 4th Block", "Jayanagar 9th Block", "Jaya Prakash Nagar 3rd Phase", "Mico Layout", "BTM Layout", "Central Silk Board", "HSR Layout", "Agara", "Domlur", "Indiranagar", "CV Raman Nagar"],
+                timings: generateTimings(6, 21, 15)
+            },
+            {
                 id: "210N", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "K R Market", "Chamarajpet", "Hanumanthnagar", "Banashankari TTMC", "Padmanabha Nagara", "Kadirenahalli Cross", "Kumaraswamy Layout Police Station", "Kumaraswamy Layout", "ISRO Layout", "Vasanthapura", "Uttarahalli"], 
-                timings: ["05:00 AM", "05:38 AM", "06:13 AM", "06:18 AM", "07:03 AM", "07:33 AM", "08:15 AM", "09:00 AM", "04:30 PM", "05:15 PM", "09:40 PM"] 
+                stops: ["Kempegowda Bus Station", "K R Market", "Makkala Koota", "Chamarajpet", "Hanumanthnagar", "Srinagar", "Banashankari TTMC", "Kadirenahalli Park", "Kadirenahalli Cross", "Dayananda Sagar College", "Kumaraswamy Layout Police Station", "Kumaraswamy Layout", "ISRO Layout", "Vasanthapura", "Uttarahalli"], 
+                timings: generateTimings(5, 22, 6) 
             },
-            { 
-                id: "500D", type: "Volvo AC", 
-                stops: ["Hebbala", "Kempapura", "Manyata Tech Park", "Nagavara", "Hennur Junction", "Kalyananagara", "Babusabpalya", "Kasturi Nagar", "Tin Factory", "K R Puram", "Mahadevapura", "Doddanekkundi", "Karthik Nagara", "Marathahalli Bridge", "Kadubisanahalli", "New Horizon College", "Devarabisanahalli", "Eco Space", "Bellandur", "Sarjapura Cross", "Ibbalur", "Agara", "HSR Layout", "Central Silk Board"], 
-                timings: ["05:35 AM", "06:00 AM", "06:30 AM", "07:00 AM", "07:15 AM", "07:30 AM", "07:45 AM", "08:00 AM", "08:15 AM", "08:30 AM", "09:00 AM", "09:05 AM", "09:15 AM", "05:00 PM", "05:30 PM", "06:00 PM", "09:40 PM"] 
-            },
-            { 
-                id: "KIA9", type: "Vayu Vajra", 
-                stops: ["Kempegowda Bus Station", "Shivananda Circle", "Mekhri Circle", "Hebbala", "Kodigehalli Gate", "Yelahanka", "Kogilu Cross", "Sadahalli Gate", "Kempegowda International Airport"], 
-                timings: ["00:15 AM", "01:05 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:05 AM", "08:00 AM", "09:05 AM", "10:20 AM", "12:20 PM", "02:25 PM", "04:20 PM", "06:40 PM", "08:00 PM", "10:30 PM"] 
-            },
-            { 
-                id: "13", type: "Ordinary", 
-                stops: ["Shivajinagara Bus Station", "Indian Express", "Richmond Circle", "Shanthinagara TTMC", "Lalbagh", "Siddapura", "Ashoka Pillar", "Jayanagara 3rd Block", "Jayanagara 4th Block", "Jayanagara T.T.M.C", "Sangam Circle", "Banashankari TTMC"], 
-                timings: ["05:10 AM", "06:00 AM", "06:45 AM", "07:30 AM", "08:15 AM", "09:00 AM", "10:30 AM", "04:15 PM", "05:00 PM", "06:30 PM", "10:10 PM"] 
-            },
-            { 
-                id: "258C", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Central Talkies", "Malleshwaram", "Yeshawanthapura TTMC", "Peenya", "Jalahalli Cross", "Dasarahalli", "Nelamangala"], 
-                timings: ["07:30 AM", "08:30 AM", "09:30 AM", "04:30 PM", "05:30 PM"] 
-            },
-            { 
-                id: "276", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Malleshwaram", "Yeshawanthapura TTMC", "Mathikere", "BEL Circle", "Vidyaranyapura"], 
-                timings: ["09:00 AM", "10:30 AM", "12:00 PM", "05:00 PM", "06:30 PM"] 
-            },
-             { 
-                id: "252F", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Malleshwaram", "Yeshawanthapura", "Peenya 2nd Stage"], 
-                timings: ["08:30 AM", "09:30 AM", "05:00 PM"] 
-            },
-            { 
-                id: "250P", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Malleshwaram", "Yeshawanthapura", "Chikkabanavara"], 
-                timings: ["08:45 AM", "05:15 PM"] 
-            },
-            { 
-                id: "402D", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Mekhri Circle", "Hebbala", "Yelahanka New Town"], 
-                timings: ["09:00 AM", "05:00 PM"] 
-            },
-            { 
-                id: "284", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Mekhri Circle", "Hebbala", "Yelahanka"], 
-                timings: ["08:00 AM", "09:00 AM", "06:00 PM"] 
-            },
-            { 
-                id: "298M", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Hebbala", "Yelahanka", "Devanahalli"], 
-                timings: ["07:00 AM", "08:30 AM", "04:00 PM"] 
-            },
-            { 
-                id: "300H", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Shivajinagara", "Ulsoor", "K R Puram"], 
-                timings: ["08:30 AM", "09:30 AM", "05:30 PM"] 
-            },
-            { 
-                id: "302B", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Frazer Town", "Kalyananagara"], 
-                timings: ["08:10 AM", "05:10 PM"] 
-            },
-            { 
-                id: "316B", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "K R Puram", "Budigere"], 
-                timings: ["06:30 PM"] 
-            },
-             { 
-                id: "333E", type: "Volvo AC", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Richmond Circle", "Domlur", "HAL", "Marathahalli", "Whitefield", "Kadugodi"], 
-                timings: ["07:30 AM", "08:00 AM", "08:30 AM", "05:00 PM", "06:00 PM"] 
-            },
-            { 
-                id: "356M", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Shanthinagara TTMC", "Silk Board", "Electronic City", "Chandapura", "Anekal"], 
-                timings: ["07:00 AM", "08:00 AM", "05:00 PM"] 
-            },
-            { 
-                id: "360B", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Shanthinagara TTMC", "Dairy Circle", "Madiwala", "Central Silk Board", "Electronic City", "Attibele"], 
-                timings: ["07:30 AM", "08:15 AM", "05:30 PM"] 
-            },
-            { 
-                id: "365J", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Bannerughatta Road", "Jigani APC Circle"], 
-                timings: ["08:00 AM", "09:00 AM", "06:00 PM"] 
-            },
-            { 
-                id: "342F", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Agara", "Sarjapura"], 
-                timings: ["06:00 AM", "06:00 PM"] 
+            {
+                id: "365", type: "Ordinary",
+                stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "Gurappanapalya", "Jayadeva Hospital", "Bilekahalli", "Apollo Hospital", "Hulimavu", "Meenakshi Temple", "Gottigere", "Bannerughatta National Park"],
+                timings: generateTimings(6, 21, 8)
             },
              { 
                 id: "25A", type: "Ordinary", 
                 stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "BTM Layout"], 
-                timings: ["08:10 AM", "08:45 AM", "05:10 PM"] 
+                timings: generateTimings(7, 21, 8) 
+            },
+
+            // --- CENTRAL & EAST (Koramangala, Indiranagar, Whitefield) ---
+             { 
+                id: "171", type: "Ordinary", 
+                stops: ["Kempegowda Bus Station", "Corporation", "Wilson Garden", "Dairy Circle", "Koramangala 1st Block", "Koramangala 5th Block", "Koramangala 80ft Road", "Koramangala TTMC"], 
+                timings: generateTimings(6, 22, 12) 
+            },
+            { 
+                id: "333E", type: "Volvo AC", 
+                stops: ["Kempegowda Bus Station", "Corporation", "Richmond Circle", "Domlur", "HAL Main Gate", "Marathahalli", "Kundalahalli", "Whitefield", "Kadugodi"], 
+                timings: generateTimings(6, 22, 8)
+            },
+            {
+                id: "335E", type: "Volvo AC",
+                stops: ["Kempegowda Bus Station", "Corporation", "Richmond Circle", "Mayo Hall", "Domlur", "HAL Main Gate", "HAL Kalyana Mantapa", "Marathahalli", "Kundalahalli Gate", "Varthur Kodi", "Hope Farm", "Kadugodi"],
+                timings: generateTimings(6, 23, 10)
+            },
+            { 
+                id: "300H", type: "Ordinary", 
+                stops: ["Kempegowda Bus Station", "Shivajinagara", "Ulsoor", "Indiranagar", "Byappanahalli", "K R Puram"], 
+                timings: generateTimings(7, 20, 15) 
+            },
+
+            // --- NORTH & WEST (Malleshwaram, Rajajinagar, Vijayanagar, Yelahanka) ---
+            { 
+                id: "276", type: "Ordinary", 
+                stops: ["Kempegowda Bus Station", "Central Talkies", "Malleshwaram 11th Cross", "Malleshwaram 18th Cross", "Tata Institute (IISc)", "Yeshawanthapura TTMC", "Mathikere", "Gokula", "BEL Circle", "Vidyaranyapura"], 
+                timings: generateTimings(6, 22, 10) 
+            },
+            { 
+                id: "258C", type: "Ordinary", 
+                stops: ["Kempegowda Bus Station", "Sujatha Talkies", "Rajajinagar 1st Block", "Navrang", "Yeshawanthapura TTMC", "Govardhan Talkies", "Jalahalli Cross", "Peenya", "Dasarahalli", "Nagasandra", "Nelamangala"], 
+                timings: generateTimings(5, 22, 8) 
             },
              { 
-                id: "215H", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Jayanagar", "Jaya Prakash Nagar", "Jambu Savari Dinne"], 
-                timings: ["07:45 AM", "08:20 AM", "05:15 PM"] 
+                id: "401K", type: "Ordinary", 
+                stops: ["Yelahanka New Town", "Yelahanka", "Hebbala", "BEL Circle", "Mathikere", "Yeshawanthapura TTMC", "Rajajinagar 1st Block", "Vijayanagara TTMC", "Attiguppe", "Nayandahalli", "Kengeri TTMC"], 
+                timings: generateTimings(6, 21, 15) 
+            },
+            {
+                id: "226N", type: "Ordinary",
+                stops: ["Kempegowda Bus Station", "Mysore Road Satellite Bus Station", "Nayandahalli", "Rajarajeshwari Nagar Gate", "Bangalore University Gate", "Kengeri TTMC", "Kumbalgodu", "Bidadi"],
+                timings: generateTimings(6, 21, 15)
+            },
+
+            // --- RING ROAD (ORR) CONNECTIONS ---
+            { 
+                id: "500D", type: "Volvo AC", 
+                stops: ["Hebbala", "Kempapura", "Manyata Tech Park", "Nagavara", "Hennur Junction", "Kalyananagara", "Babusabpalya", "Kasturi Nagar", "Tin Factory", "K R Puram", "Mahadevapura", "Doddanekkundi", "Karthik Nagara", "Marathahalli Bridge", "Kadubisanahalli", "New Horizon College", "Devarabisanahalli", "Eco Space", "Bellandur", "Sarjapura Cross", "Ibbalur", "Agara", "HSR Layout", "Central Silk Board"], 
+                timings: generateTimings(5, 23, 7) 
+            },
+             {
+                id: "500CA", type: "Ordinary",
+                stops: ["Banashankari TTMC", "Central Silk Board", "HSR Layout", "Agara", "Bellandur", "Marathahalli", "K R Puram", "Tin Factory", "Kalyananagara", "Hebbala"],
+                timings: generateTimings(6, 21, 15)
+            },
+
+             // --- ELECTRONIC CITY & HOSUR ROAD ---
+            {
+                id: "356M", type: "Ordinary",
+                stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "Madiwala", "Central Silk Board", "Roopena Agrahara", "Bommanahalli", "Garvebhavipalya", "Kudlu Gate", "Singasandra", "Hosa Road", "Electronic City", "Veerasandra", "Hebbagodi", "Bommasandra", "Chandapura", "Anekal"],
+                timings: generateTimings(5, 22, 6)
+            },
+
+            // --- AIRPORT (KIA) ---
+            { 
+                id: "KIA-4", type: "Vayu Vajra", 
+                stops: ["HAL Main Gate", "Marathahalli", "Hennur Cross", "Hebbala", "Kempegowda International Airport"], 
+                timings: ["03:00 AM", "05:00 AM", "07:00 AM", "09:00 AM", "11:00 AM", "01:00 PM", "03:00 PM", "05:00 PM", "07:00 PM", "09:00 PM"]
             },
             { 
-                id: "226N", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Mysore Road", "Kengeri", "Bidadi"], 
-                timings: ["06:00 PM"] 
+                id: "KIA-8", type: "Vayu Vajra", 
+                stops: ["Electronic City", "Silk Board", "HSR Layout", "Marathahalli", "Hebbala", "Kempegowda International Airport"], 
+                timings: generateTimings(4, 23, 30)
             },
             { 
-                id: "225C", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Mysore Road", "BEML Layout"], 
-                timings: ["08:10 AM", "05:30 PM"] 
-            },
-            { 
-                id: "61", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Magadi Road", "Vijayanagara TTMC"], 
-                timings: ["09:00 AM", "06:00 PM"] 
-            },
-            { 
-                id: "45D", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Gavipuram", "AGS Layout"], 
-                timings: ["08:00 AM"] 
-            },
-            { 
-                id: "242B", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Magadi Road", "Tavarakere"], 
-                timings: ["05:30 PM"] 
-            },
-             { 
-                id: "KBS5H", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Kanakapura Road", "Harohalli"], 
-                timings: ["06:30 AM", "05:30 PM"] 
-            },
-            { id: "HS1", type: "Pushpak", stops: ["Kempegowda Bus Station", "Apollo Hospital"], timings: ["08:00 AM"] },
-            { id: "HS2", type: "Pushpak", stops: ["Kempegowda Bus Station", "Jaya Prakash Nagar", "Supra Hospital"], timings: ["08:30 AM", "05:00 PM"] },
-            { id: "HS3", type: "Pushpak", stops: ["Kempegowda Bus Station", "Rajarajeshwari Hospital"], timings: ["09:00 AM"] },
-            { id: "HS4", type: "Pushpak", stops: ["Kempegowda Bus Station", "Devanahalli General Hospital"], timings: ["07:00 AM"] },
-            { id: "HS5", type: "Pushpak", stops: ["Kempegowda Bus Station", "Ambedkar Medical College"], timings: ["08:00 AM"] },
-            { id: "HS6", type: "Pushpak", stops: ["Kempegowda Bus Station", "Hosakote General Hospital"], timings: ["07:30 AM"] },
-            { id: "HS7", type: "Pushpak", stops: ["Kempegowda Bus Station", "Vaidehi Hospital"], timings: ["08:20 AM"] },
-            { id: "HS8", type: "Pushpak", stops: ["Kempegowda Bus Station", "Nelamangala General Hospital"], timings: ["08:40 AM"] },
-            { id: "HS9", type: "Pushpak", stops: ["Kempegowda Bus Station", "Sapthagiri Medical College"], timings: ["09:10 AM"] },
-            { id: "HS10", type: "Pushpak", stops: ["Kempegowda Bus Station", "Sakra Hospital"], timings: ["08:50 AM"] },
-            { 
-                id: "13S", type: "Ordinary", 
-                stops: ["Shivajinagara Bus Station", "Corporation", "Lalbagh", "South End Circle", "Banashankari", "Kumaraswamy Layout", "Pipelines"], 
-                timings: ["08:10 AM", "09:10 AM", "04:45 PM", "05:45 PM"] 
+                id: "KIA-9", type: "Vayu Vajra", 
+                stops: ["Kempegowda Bus Station", "Shivananda Circle", "Mekhri Circle", "Hebbala", "Kodigehalli Gate", "Yelahanka", "Kogilu Cross", "Sadahalli Gate", "Kempegowda International Airport"], 
+                timings: generateTimings(0, 23, 20) 
             }
         ];
         
+        // --- POPULATE SEARCH LOCATIONS FROM ROUTES ---
+        // Dynamically build the list of locations from the busRoutes stops to ensure coverage
+        const locationSet = new Set();
+        busRoutes.forEach(route => {
+            route.stops.forEach(stop => locationSet.add(stop));
+        });
+        
+        // Add manual important locations just in case
+        ["Majestic", "KBS", "City Market", "Shivajinagar"].forEach(loc => locationSet.add(loc));
+
+        const locations = Array.from(locationSet).sort();
+
         // --- DOM ELEMENTS ---
         const fromInput = document.getElementById('from-input');
         const toInput = document.getElementById('to-input');
@@ -523,7 +401,9 @@
                     return;
                 }
 
-                const filtered = locations.filter(loc => loc.toLowerCase().includes(value));
+                // Limit results to 10 for performance
+                const filtered = locations.filter(loc => loc.toLowerCase().includes(value)).slice(0, 10);
+                
                 if (filtered.length > 0) {
                     listElement.classList.remove('hidden');
                     filtered.forEach(loc => {
@@ -566,8 +446,7 @@
         
         // --- TIME HELPER ---
         function convertToMinutes(timeStr) {
-            if(!timeStr || timeStr.includes("Every") || timeStr.includes("Frequent") || timeStr.includes("24x7")) return -1;
-            
+            if(!timeStr) return -1;
             const [time, modifier] = timeStr.split(' ');
             let [hours, minutes] = time.split(':');
             
@@ -584,7 +463,17 @@
             return hours * 60 + minutes;
         }
 
-        // --- ANIMATION LOGIC (Red Bus SVG) ---
+        function minutesToTimeStr(totalMinutes) {
+            let h = Math.floor(totalMinutes / 60);
+            const m = totalMinutes % 60;
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12;
+            h = h ? h : 12; // the hour '0' should be '12'
+            const mStr = m < 10 ? '0' + m : m;
+            return `${h}:${mStr} ${ampm}`;
+        }
+
+        // --- ANIMATION LOGIC ---
         function startJourney() {
             const fromVal = fromInput.value;
             const toVal = toInput.value;
@@ -601,7 +490,7 @@
             const ctx = canvas.getContext('2d');
             
             let start = null;
-            const duration = 2500; 
+            const duration = 1500; // Faster animation
 
             const p0 = { x: 100, y: 300 }; 
             const p1 = { x: 400, y: 50 }; 
@@ -702,17 +591,15 @@
                 upcomingSection.classList.add('hidden');
             }
 
+            // Flexible Search: Check if stop name "includes" the search term
             const availableBuses = busRoutes.filter(bus => {
                 const fIdx = bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
                 const tIdx = bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase()));
                 
-                // Directional Match
+                // Directional Match (Start must be before End in the route list)
                 if (fIdx !== -1 && tIdx !== -1 && tIdx > fIdx) return true;
                 
-                // Fallback: Check if route contains both locations
-                const hasFrom = bus.stops.some(s => s.toLowerCase().includes(from.toLowerCase()));
-                const hasTo = bus.stops.some(s => s.toLowerCase().includes(to.toLowerCase()));
-                return hasFrom && hasTo;
+                return false;
             });
 
             if (availableBuses.length === 0) {
@@ -732,13 +619,14 @@
                 const fIdx = Math.max(0, bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase())));
                 const tIdx = Math.max(1, bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase())));
                 const stopsCount = Math.abs(tIdx - fIdx) || 5; 
-                const duration = stopsCount * 5 + 10; 
+                // Approx 4 mins per stop for realistic city traffic
+                const duration = stopsCount * 4 + 10; 
                 
                 const intermediate = bus.stops.slice(Math.min(fIdx,tIdx)+1, Math.max(fIdx,tIdx));
+                // Show up to 3 via stops
                 const viaStops = intermediate.filter((_, i) => i % Math.ceil(intermediate.length/3) === 0).slice(0, 3).join(" • ");
 
                 let timingHtml = '';
-                const firstTiming = bus.timings[0] || "No schedule";
                 
                 // Logic for "Upcoming" list vs "All" list
                 let displayTimes = bus.timings;
@@ -747,26 +635,22 @@
                     // Filter timings that are >= userMinutes
                     const validTimings = bus.timings.filter(t => {
                        const min = convertToMinutes(t);
-                       return min === -1 || min >= userMinutes; // Include frequent buses (-1) always
+                       return min >= userMinutes; 
                     });
                     
                     if (validTimings.length === 0) return null; // Skip this bus if no upcoming trips
                     displayTimes = validTimings;
                 }
 
-                if(firstTiming.includes("Every") || firstTiming.includes("Frequent") || firstTiming.includes("24x7")) {
-                     timingHtml = `<div class="mt-2 bg-green-50 text-green-700 px-3 py-1 rounded-md text-sm font-semibold inline-block border border-green-200"><i class="fa-solid fa-rotate mr-1"></i> ${firstTiming}</div>`;
-                } else {
-                     const showLimit = isUpcomingList ? 2 : 4;
-                     const timeStr = displayTimes.slice(0, showLimit).join(", ");
-                     const moreCount = Math.max(0, displayTimes.length - showLimit);
-                     timingHtml = `
+                const showLimit = isUpcomingList ? 2 : 4;
+                const timeStr = displayTimes.slice(0, showLimit).join(", ");
+                const moreCount = Math.max(0, displayTimes.length - showLimit);
+                timingHtml = `
                         <div class="mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded border border-gray-100">
                             <i class="fa-regular fa-clock mr-1 text-oceanBlue"></i> 
                             <span class="font-semibold text-deepBlue">${timeStr}</span>
                             ${moreCount > 0 ? `<span class="text-xs text-gray-400 ml-1">(+${moreCount} more)</span>` : ''}
                         </div>`;
-                }
 
                 const card = document.createElement('div');
                 card.className = "bus-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6";
@@ -835,7 +719,7 @@
             searchView.classList.remove('hidden');
         }
 
-        // --- TRACKING MODAL ---
+        // --- TRACKING MODAL LOGIC (UPDATED) ---
         function openTracking(busId, from, to) {
             const bus = busRoutes.find(b => b.id === busId);
             if (!bus) return;
@@ -854,18 +738,49 @@
             const minIdx = Math.min(startIdx, endIdx);
             const maxIdx = Math.max(startIdx, endIdx);
 
-            // Establish Base Start Time
-            let baseTime = new Date();
+            // --- CRITICAL UPDATE: Calculate REALISTIC Schedule based on Bus Timings ---
+            
+            // 1. Get User Input Time (or Now)
+            let searchTimeMin = 0;
             const timeInputValue = document.getElementById('time-input').value;
             if(timeInputValue) {
                 const [h, m] = timeInputValue.split(':');
-                baseTime.setHours(h, m, 0, 0);
+                searchTimeMin = parseInt(h) * 60 + parseInt(m);
+            } else {
+                const now = new Date();
+                searchTimeMin = now.getHours() * 60 + now.getMinutes();
             }
+
+            // 2. Find the NEXT scheduled departure from the list
+            // We convert all bus timings to minutes and find the first one >= searchTimeMin
+            // If none found (late night), we wrap to the first bus of the next day (index 0)
+            let nextBusTimeMin = -1;
+            
+            for (let t of bus.timings) {
+                const busMin = convertToMinutes(t);
+                if (busMin >= searchTimeMin) {
+                    nextBusTimeMin = busMin;
+                    break;
+                }
+            }
+
+            // If no bus found today, use the first bus of tomorrow
+            if (nextBusTimeMin === -1 && bus.timings.length > 0) {
+                nextBusTimeMin = convertToMinutes(bus.timings[0]);
+            }
+
+            // Display "Next Departure" in Modal Header
+            const nextDepartureStr = minutesToTimeStr(nextBusTimeMin);
+            document.getElementById('modal-next-bus').innerText = nextDepartureStr;
+
+            // 3. Establish Base Time for the Bus at the FIRST Stop (Index 0 of route)
+            // Note: The timings in DB are usually for the starting point.
+            // We assume bus.timings are for index 0.
             
             bus.stops.forEach((stop, index) => {
                 const li = document.createElement('li');
                 
-                // Determine styling based on position relative to route
+                // Determine styling
                 let isActive = false;
                 let isPast = false;
                 
@@ -874,10 +789,14 @@
                     if (index < minIdx) isPast = true;
                 }
                 
-                // Calculate Time Offset relative to user's "From" stop (minIdx)
-                const offsetMinutes = (index - minIdx) * 5; 
-                const stopTime = new Date(baseTime.getTime() + offsetMinutes * 60000);
-                const timeString = stopTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                // --- TIME CALCULATION ---
+                // Assume 4 minutes per stop
+                const minutesFromStart = index * 4; 
+                const arrivalAtStopMin = nextBusTimeMin + minutesFromStart;
+                
+                // Handle day wrap (over 24h = 1440 min)
+                let finalMin = arrivalAtStopMin % 1440;
+                const timeString = minutesToTimeStr(finalMin);
 
                 // Styles
                 const borderClass = isActive ? "border-l-4 border-oceanBlue" : "border-l-2 border-dashed border-gray-200";
@@ -888,17 +807,13 @@
                 // Dot
                 let dotHtml = '';
                 if(index === minIdx) {
-                     // Start Dot (Green)
-                     dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-green-500 ring-4 ring-green-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-play text-[8px] text-white ml-0.5"></i></div>`;
+                      dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-green-500 ring-4 ring-green-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-play text-[8px] text-white ml-0.5"></i></div>`;
                 } else if(index === maxIdx) {
-                     // End Dot (Red)
-                     dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-red-500 ring-4 ring-red-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[8px] text-white"></i></div>`;
+                      dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-red-500 ring-4 ring-red-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[8px] text-white"></i></div>`;
                 } else if (isActive) {
-                     // Active path dot (Blue)
-                     dotHtml = `<div class="absolute -left-[37px] top-6 w-3 h-3 rounded-full bg-oceanBlue border-2 border-white"></div>`;
+                      dotHtml = `<div class="absolute -left-[37px] top-6 w-3 h-3 rounded-full bg-oceanBlue border-2 border-white"></div>`;
                 } else {
-                     // Inactive dot (Gray)
-                     dotHtml = `<div class="absolute -left-[37px] top-6 w-3 h-3 rounded-full bg-gray-300 border-2 border-white"></div>`;
+                      dotHtml = `<div class="absolute -left-[37px] top-6 w-3 h-3 rounded-full bg-gray-300 border-2 border-white"></div>`;
                 }
 
                 li.className = `relative mb-4 last:mb-0 transition-all duration-300`;
@@ -924,12 +839,11 @@
                 listEl.appendChild(li);
             });
 
-            // Construct Google Maps URL for Directions
+            // Construct Google Maps URL
             const origin = encodeURIComponent(from + ", Bangalore, Karnataka");
             const destination = encodeURIComponent(to + ", Bangalore, Karnataka");
             const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
             
-            // Update "Open in Google Maps" button
             document.getElementById('gmaps-link').href = gmapsUrl;
         }
 
@@ -945,8 +859,4 @@
         }
     </script>
 </body>
-</html>
-    
-  </body>
-  
 </html>
