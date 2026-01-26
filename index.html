@@ -22,6 +22,8 @@
                         skyBlue: '#00B4D8',
                         lightSky: '#90E0EF',
                         paleWater: '#CAF0F8',
+                        metroPurple: '#9333EA',
+                        metroGreen: '#16A34A',
                     }
                 }
             }
@@ -39,6 +41,7 @@
         #animation-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #CAF0F8; z-index: 50; display: none; flex-direction: column; align-items: center; justify-content: center; }
         .bus-card { transition: transform 0.2s, box-shadow 0.2s; border-left: 5px solid #0077B6; }
         .bus-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -5px rgba(3, 4, 94, 0.15); }
+        .metro-card { border-left: 5px solid #9333EA; background: linear-gradient(to right, #FAF5FF, #fff); }
         .via-stops span:not(:last-child)::after { content: "•"; margin: 0 6px; color: #00B4D8; }
     </style>
 </head>
@@ -66,7 +69,7 @@
         <div id="search-view" class="block">
             <div class="hero-bg text-white pt-16 pb-28 px-4 text-center shadow-lg">
                 <h2 class="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md">Find Your Route</h2>
-                <p class="text-lightSky text-lg mb-8 font-light tracking-wider">Live Tracking | Real Timings | All Routes</p>
+                <p class="text-lightSky text-lg mb-8 font-light tracking-wider">Route Tracking | Real Timings | Bus Route</p>
                 
                 <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-lg mx-auto text-left relative z-10 border-t-4 border-oceanBlue">
                     
@@ -107,7 +110,7 @@
                     </div>
 
                     <button onclick="startJourney()" class="w-full bg-oceanBlue hover:bg-deepBlue text-white font-bold py-4 px-4 rounded-xl transition duration-300 shadow-lg transform active:scale-95 flex justify-center items-center gap-2">
-                        SEARCH BUSES <i class="fa-solid fa-magnifying-glass"></i>
+                        SEARCH ROUTES <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
             </div>
@@ -116,9 +119,9 @@
             <div class="container mx-auto mt-12 px-4">
                 <h3 class="text-xl font-bold text-deepBlue mb-6 text-center border-b-2 border-skyBlue inline-block mx-auto pb-1">Frequent Routes</h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Jaya Prakash Nagar 6th Phase')">
+                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Jaya Prakash Nagar 6th Phase', 'Kempegowda Bus Station')">
                         <span class="block text-oceanBlue font-extrabold text-xl">215H</span>
-                        <span class="text-xs text-gray-500">KBS - JP Nagar</span>
+                        <span class="text-xs text-gray-500">JP Nagar - KBS</span>
                     </div>
                     <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Hebbala', 'Central Silk Board')">
                         <span class="block text-oceanBlue font-extrabold text-xl">500D</span>
@@ -128,9 +131,9 @@
                         <span class="block text-oceanBlue font-extrabold text-xl">171</span>
                         <span class="text-xs text-gray-500">KBS - Koramangala</span>
                     </div>
-                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Kempegowda Bus Station', 'Whitefield')">
+                    <div class="bg-white p-4 rounded-xl shadow-md border border-lightSky hover:shadow-lg transition cursor-pointer" onclick="fillSearch('Whitefield', 'Kempegowda Bus Station')">
                         <span class="block text-oceanBlue font-extrabold text-xl">335E</span>
-                        <span class="text-xs text-gray-500">KBS - Whitefield</span>
+                        <span class="text-xs text-gray-500">Whitefield - KBS</span>
                     </div>
                 </div>
             </div>
@@ -160,23 +163,21 @@
                 </div>
             </div>
 
-            <!-- SECTION 1: UPCOMING BUSES -->
-            <div id="upcoming-section" class="mb-10 hidden">
-                <h3 class="text-xl font-bold text-deepBlue mb-4 flex items-center gap-2 border-b border-gray-200 pb-2">
-                    <i class="fa-regular fa-clock text-green-600"></i> 
-                    <span>Upcoming Buses <span class="text-sm font-normal text-gray-500">(After <span id="filter-time-display"></span>)</span></span>
+            <!-- SECTION 1: METRO SUGGESTIONS -->
+            <div id="metro-section" class="mb-10 hidden">
+                 <h3 class="text-xl font-bold text-deepBlue mb-4 flex items-center gap-2 border-b border-gray-200 pb-2">
+                    <i class="fa-solid fa-train-subway text-metroPurple"></i> 
+                    <span>Namma Metro Suggestions</span>
                 </h3>
-                <div id="upcoming-bus-list" class="space-y-5">
-                    <!-- Injected via JS -->
-                </div>
+                <div id="metro-list" class="space-y-4"></div>
             </div>
 
-            <!-- SECTION 2: ALL BUSES -->
+            <!-- SECTION 2: BUSES -->
             <div>
                 <h3 class="text-xl font-bold text-deepBlue mb-4 flex items-center gap-2 border-b border-gray-200 pb-2">
-                    <i class="fa-solid fa-list-ul text-oceanBlue"></i> All Scheduled Buses
+                    <i class="fa-solid fa-bus text-oceanBlue"></i> Available Bus Routes
                 </h3>
-                <div id="all-bus-list" class="space-y-5">
+                <div id="bus-list-container" class="space-y-5">
                     <!-- Injected via JS -->
                 </div>
             </div>
@@ -188,7 +189,7 @@
     <div id="animation-container">
         <div class="text-center mb-6">
             <h2 class="text-3xl font-bold text-deepBlue">Finding Best Route...</h2>
-            <p class="text-oceanBlue mt-2" id="anim-subtext">Checking BMTC Schedules</p>
+            <p class="text-oceanBlue mt-2" id="anim-subtext">Checking BMTC & Metro Schedules</p>
         </div>
         <canvas id="routeCanvas" width="800" height="400" class="w-full max-w-3xl"></canvas>
     </div>
@@ -358,9 +359,20 @@
                 timings: generateTimings(0, 23, 20) 
             }
         ];
+
+        // --- METRO DATABASE ---
+        const metroLines = [
+            {
+                name: "Purple Line",
+                stations: ["Whitefield", "Hope Farm", "Kadugodi", "K R Puram", "Benniganahalli", "Indiranagar", "Halasuru", "Trinity", "MG Road", "Cubbon Park", "Dr. B.R. Ambedkar Station Vidhana Soudha", "Sir M. Visvesvaraya Station", "Nadaprabhu Kempegowda Station", "City Railway Station", "Magadi Road", "Hosahalli", "Vijayanagara", "Attiguppe", "Deepanjali Nagar", "Mysore Road", "Nayandahalli", "Rajarajeshwari Nagar", "Jnanabharathi", "Pattanagere", "Kengeri Bus Terminal", "Kengeri", "Challaghatta"]
+            },
+            {
+                name: "Green Line",
+                stations: ["Nagasandra", "Dasarahalli", "Jalahalli", "Peenya Industry", "Peenya", "Goraguntepalya", "Yeshwanthpur", "Sandal Soap Factory", "Mahalakshmi", "Rajajinagar", "Kuvempu Road", "Srirampura", "Mantri Square Sampige Road", "Nadaprabhu Kempegowda Station", "Chickpete", "Krishna Rajendra Market", "National College", "Lalbagh", "South End Circle", "Jayanagar", "Rashtreeya Vidyalaya Road", "Banashankari", "Jaya Prakash Nagar", "Yelachenahalli", "Konanakunte Cross", "Doddakallasandra", "Vajarahalli", "Thalaghattapura", "Silk Institute"]
+            }
+        ];
         
         // --- POPULATE SEARCH LOCATIONS FROM ROUTES ---
-        // Dynamically build the list of locations from the busRoutes stops to ensure coverage
         const locationSet = new Set();
         busRoutes.forEach(route => {
             route.stops.forEach(stop => locationSet.add(stop));
@@ -379,10 +391,9 @@
         const searchView = document.getElementById('search-view');
         const resultsView = document.getElementById('results-view');
         const animContainer = document.getElementById('animation-container');
-        const busList = document.getElementById('bus-list');
-        const upcomingBusList = document.getElementById('upcoming-bus-list');
-        const allBusList = document.getElementById('all-bus-list');
-        const upcomingSection = document.getElementById('upcoming-section');
+        const busListContainer = document.getElementById('bus-list-container');
+        const metroList = document.getElementById('metro-list');
+        const metroSection = document.getElementById('metro-section');
 
         // --- HELPER FUNCTION FOR QUICK LINKS ---
         function fillSearch(from, to) {
@@ -490,7 +501,7 @@
             const ctx = canvas.getContext('2d');
             
             let start = null;
-            const duration = 1500; // Faster animation
+            const duration = 1200; 
 
             const p0 = { x: 100, y: 300 }; 
             const p1 = { x: 400, y: 50 }; 
@@ -571,13 +582,87 @@
             resultsView.classList.remove('hidden');
             document.getElementById('res-from').innerText = from;
             document.getElementById('res-to').innerText = to;
+            
             findAndDisplayBuses(from, to);
+            findAndDisplayMetro(from, to);
+        }
+
+        // --- METRO LOGIC ---
+        function findAndDisplayMetro(from, to) {
+            metroList.innerHTML = '';
+            metroSection.classList.add('hidden');
+
+            const fLower = from.toLowerCase();
+            const tLower = to.toLowerCase();
+            
+            // Heuristic to check if location matches a station roughly
+            // Note: This is a simple substring check. Real world needs fuzzy matching.
+            
+            let startStation = null;
+            let endStation = null;
+            let line = null;
+
+            metroLines.forEach(l => {
+                const s1 = l.stations.find(s => fLower.includes(s.toLowerCase()) || s.toLowerCase().includes(fLower));
+                const s2 = l.stations.find(s => tLower.includes(s.toLowerCase()) || s.toLowerCase().includes(tLower));
+                
+                if (s1 && s2) {
+                    startStation = s1;
+                    endStation = s2;
+                    line = l;
+                }
+            });
+
+            // Special Case: KBS is Nadaprabhu Kempegowda Station
+            if(fLower.includes("kempegowda bus") || fLower.includes("majestic") || fLower.includes("kbs")) {
+                const l = metroLines[0]; // Purple
+                const s = l.stations.find(st => st.includes("Kempegowda Station"));
+                if(!startStation) startStation = s;
+            }
+             if(tLower.includes("kempegowda bus") || tLower.includes("majestic") || tLower.includes("kbs")) {
+                const l = metroLines[0]; // Purple
+                const s = l.stations.find(st => st.includes("Kempegowda Station"));
+                if(!endStation) endStation = s;
+            }
+
+
+            if (startStation && endStation) {
+                metroSection.classList.remove('hidden');
+                const div = document.createElement('div');
+                const lineColor = line.name.includes("Purple") ? "border-purple-500" : "border-green-500";
+                const badgeColor = line.name.includes("Purple") ? "bg-purple-100 text-purple-700" : "bg-green-100 text-green-700";
+                
+                div.className = `metro-card p-5 rounded-xl shadow-sm border-l-8 ${lineColor}`;
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-gray-100 p-3 rounded-full">
+                                <i class="fa-solid fa-train text-gray-700 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-deepBlue">Metro Available</h4>
+                                <div class="text-sm text-gray-600">
+                                    Board at <span class="font-bold">${startStation}</span> 
+                                    <i class="fa-solid fa-arrow-right mx-1 text-xs"></i> 
+                                    Alight at <span class="font-bold">${endStation}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase ${badgeColor}">
+                            ${line.name}
+                        </span>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500 pl-14">
+                        <i class="fa-regular fa-clock"></i> Frequency: Every 5-10 mins
+                    </div>
+                `;
+                metroList.appendChild(div);
+            }
         }
 
         // --- ROUTING & RESULTS ---
         function findAndDisplayBuses(from, to) {
-            upcomingBusList.innerHTML = '';
-            allBusList.innerHTML = '';
+            busListContainer.innerHTML = '';
             
             // Get user input time in minutes
             const timeVal = timeInput.value;
@@ -585,133 +670,158 @@
             if(timeVal) {
                 const [h, m] = timeVal.split(':');
                 userMinutes = parseInt(h) * 60 + parseInt(m);
-                document.getElementById('filter-time-display').innerText = timeVal;
-                upcomingSection.classList.remove('hidden');
-            } else {
-                upcomingSection.classList.add('hidden');
             }
 
-            // Flexible Search: Check if stop name "includes" the search term
-            const availableBuses = busRoutes.filter(bus => {
+            // --- IMPROVED SEARCH LOGIC ---
+            // 1. Matches Direct Buses (Forward)
+            // 2. Matches Direct Buses (Reverse)
+            
+            const results = [];
+
+            busRoutes.forEach(bus => {
                 const fIdx = bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
                 const tIdx = bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase()));
                 
-                // Directional Match (Start must be before End in the route list)
-                if (fIdx !== -1 && tIdx !== -1 && tIdx > fIdx) return true;
-                
-                return false;
+                if (fIdx !== -1 && tIdx !== -1) {
+                    if (tIdx > fIdx) {
+                         // Forward Journey found
+                         results.push({ bus: bus, reverse: false });
+                    } else {
+                         // Reverse Journey found
+                         results.push({ bus: bus, reverse: true });
+                    }
+                }
             });
+            
+            // --- CONNECTING ROUTE LOGIC (Simple) ---
+            // If no results, check if we can suggest a bus to Majestic (KBS)
+            const isDestinationKBS = to.toLowerCase().includes("kempegowda") || to.toLowerCase().includes("majestic") || to.toLowerCase().includes("kbs");
+            
+            if (results.length === 0 && !isDestinationKBS) {
+                 // Try finding a bus from Source -> KBS
+                 busRoutes.forEach(bus => {
+                    const fIdx = bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
+                    const kbsIdx = bus.stops.findIndex(s => s.includes("Kempegowda Bus Station"));
+                    
+                    if (fIdx !== -1 && kbsIdx !== -1) {
+                         // Add this as a "Suggestion"
+                         if(kbsIdx > fIdx) results.push({ bus: bus, reverse: false, isSuggestion: true });
+                         else results.push({ bus: bus, reverse: true, isSuggestion: true });
+                    }
+                 });
+            }
 
-            if (availableBuses.length === 0) {
-                const noResultHTML = `
+            if (results.length === 0) {
+                busListContainer.innerHTML = `
                     <div class="text-center py-12 bg-white rounded-xl shadow-sm border border-paleWater col-span-2">
                         <i class="fa-solid fa-route text-5xl text-gray-300 mb-4"></i>
                         <h3 class="text-xl font-bold text-deepBlue">No direct bus found.</h3>
-                        <p class="text-oceanBlue mt-2 px-4">Try splitting your journey at a major hub like <b>Majestic (KBS)</b> or <b>Banashankari TTMC</b>.</p>
+                        <p class="text-oceanBlue mt-2 px-4">We couldn't find a direct bus or a simple connection to Majestic.</p>
+                        <p class="text-sm text-gray-500 mt-1">Try searching for a nearby landmark.</p>
                         <button onclick="goBack()" class="mt-6 bg-oceanBlue text-white px-6 py-2 rounded-full font-bold hover:bg-deepBlue transition">Try New Search</button>
                     </div>`;
-                allBusList.innerHTML = noResultHTML;
                 return;
             }
 
             // --- RENDER FUNCTION ---
-            const createCard = (bus, isUpcomingList = false) => {
-                const fIdx = Math.max(0, bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase())));
-                const tIdx = Math.max(1, bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase())));
-                const stopsCount = Math.abs(tIdx - fIdx) || 5; 
-                // Approx 4 mins per stop for realistic city traffic
+            results.forEach(item => {
+                const { bus, reverse, isSuggestion } = item;
+                
+                // Calculate details based on direction
+                let startStop = "";
+                let endStop = "";
+                let stopsCount = 0;
+                
+                if (!reverse) {
+                    const fIdx = Math.max(0, bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase())));
+                    const tIdx = isSuggestion ? bus.stops.findIndex(s => s.includes("Kempegowda Bus Station")) : Math.max(1, bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase())));
+                    
+                    startStop = bus.stops[fIdx];
+                    endStop = bus.stops[tIdx];
+                    stopsCount = Math.abs(tIdx - fIdx);
+                } else {
+                    const fIdx = bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
+                    const tIdx = isSuggestion ? bus.stops.findIndex(s => s.includes("Kempegowda Bus Station")) : bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase()));
+                    
+                    startStop = bus.stops[fIdx];
+                    endStop = bus.stops[tIdx];
+                    stopsCount = Math.abs(fIdx - tIdx);
+                }
+                
                 const duration = stopsCount * 4 + 10; 
-                
-                const intermediate = bus.stops.slice(Math.min(fIdx,tIdx)+1, Math.max(fIdx,tIdx));
-                // Show up to 3 via stops
-                const viaStops = intermediate.filter((_, i) => i % Math.ceil(intermediate.length/3) === 0).slice(0, 3).join(" • ");
 
-                let timingHtml = '';
-                
-                // Logic for "Upcoming" list vs "All" list
+                // Timing Logic (Simplified for reverse: we assume same frequency)
                 let displayTimes = bus.timings;
-                
-                if(isUpcomingList && userMinutes !== -1) {
-                    // Filter timings that are >= userMinutes
+                if(userMinutes !== -1) {
                     const validTimings = bus.timings.filter(t => {
                        const min = convertToMinutes(t);
                        return min >= userMinutes; 
                     });
-                    
-                    if (validTimings.length === 0) return null; // Skip this bus if no upcoming trips
-                    displayTimes = validTimings;
+                    if (validTimings.length > 0) displayTimes = validTimings;
                 }
-
-                const showLimit = isUpcomingList ? 2 : 4;
-                const timeStr = displayTimes.slice(0, showLimit).join(", ");
-                const moreCount = Math.max(0, displayTimes.length - showLimit);
-                timingHtml = `
-                        <div class="mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded border border-gray-100">
-                            <i class="fa-regular fa-clock mr-1 text-oceanBlue"></i> 
-                            <span class="font-semibold text-deepBlue">${timeStr}</span>
-                            ${moreCount > 0 ? `<span class="text-xs text-gray-400 ml-1">(+${moreCount} more)</span>` : ''}
-                        </div>`;
+                
+                const timeStr = displayTimes.slice(0, 4).join(", ");
+                const moreCount = Math.max(0, displayTimes.length - 4);
 
                 const card = document.createElement('div');
                 card.className = "bus-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6";
                 
                 const isAC = bus.type.includes("Volvo") || bus.type.includes("Vayu");
                 const badgeColor = isAC ? "bg-oceanBlue text-white" : "bg-skyBlue text-white";
+                
+                let suggestionBanner = '';
+                if(isSuggestion) {
+                    card.classList.add("border-yellow-400");
+                    card.style.borderLeft = "5px solid #FBBF24";
+                    suggestionBanner = `<div class="w-full bg-yellow-50 text-yellow-800 text-xs px-3 py-1 mb-2 rounded font-bold border border-yellow-200"><i class="fa-solid fa-lightbulb mr-1"></i> Suggestion: Take this to Majestic (KBS) and change bus</div>`;
+                }
+
+                const displayBusId = reverse ? `${bus.id} (Return)` : bus.id;
 
                 card.innerHTML = `
-                    <div class="flex items-center gap-5 w-full md:w-auto">
-                        <div class="h-16 w-16 rounded-xl ${badgeColor} flex flex-col items-center justify-center shadow-md flex-shrink-0">
-                            <span class="text-xl font-bold">${bus.id.split('-')[0]}</span>
-                            <span class="text-[10px] uppercase">${bus.id.split('-')[1] || ''}</span>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3">
-                                <h3 class="font-bold text-2xl text-deepBlue">${bus.id}</h3>
-                                <span class="text-xs px-2 py-1 rounded bg-paleWater text-oceanBlue font-semibold uppercase tracking-wide border border-skyBlue">${bus.type}</span>
+                    <div class="w-full">
+                        ${suggestionBanner}
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-5">
+                            <div class="flex items-center gap-5 w-full md:w-auto">
+                                <div class="h-16 w-16 rounded-xl ${badgeColor} flex flex-col items-center justify-center shadow-md flex-shrink-0">
+                                    <span class="text-xl font-bold">${bus.id.split('-')[0]}</span>
+                                    <span class="text-[10px] uppercase">${bus.id.split('-')[1] || ''}</span>
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="flex items-center gap-3">
+                                        <h3 class="font-bold text-2xl text-deepBlue">${displayBusId}</h3>
+                                        <span class="text-xs px-2 py-1 rounded bg-paleWater text-oceanBlue font-semibold uppercase tracking-wide border border-skyBlue">${bus.type}</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">Towards: <span class="font-semibold text-oceanBlue">${reverse ? bus.stops[0] : bus.stops[bus.stops.length-1]}</span></p>
+                                    <div class="mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded border border-gray-100">
+                                        <i class="fa-regular fa-clock mr-1 text-oceanBlue"></i> 
+                                        <span class="font-semibold text-deepBlue">${timeStr}</span>
+                                        ${moreCount > 0 ? `<span class="text-xs text-gray-400 ml-1">(+${moreCount} more)</span>` : ''}
+                                    </div>
+                                </div>
                             </div>
-                            ${viaStops ? `<p class="text-xs text-oceanBlue mt-1 via-stops font-medium truncate max-w-xs"><span class="text-gray-400 mr-1">Via:</span>${viaStops}</p>` : ''}
-                            ${timingHtml}
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center gap-8 text-sm w-full md:w-auto justify-between md:justify-center bg-paleWater p-3 rounded-lg md:bg-transparent md:p-0">
-                        <div class="text-center">
-                            <p class="font-bold text-deepBlue text-lg">${stopsCount}</p>
-                            <p class="text-xs text-oceanBlue uppercase">Stops</p>
-                        </div>
-                        <div class="w-px h-8 bg-skyBlue hidden md:block"></div>
-                        <div class="text-center">
-                            <p class="font-bold text-deepBlue text-lg">~${duration} <span class="text-sm font-normal">min</span></p>
-                            <p class="text-xs text-oceanBlue uppercase">Duration</p>
-                        </div>
-                    </div>
+                            
+                            <div class="flex items-center gap-8 text-sm w-full md:w-auto justify-between md:justify-center bg-paleWater p-3 rounded-lg md:bg-transparent md:p-0">
+                                <div class="text-center">
+                                    <p class="font-bold text-deepBlue text-lg">${stopsCount}</p>
+                                    <p class="text-xs text-oceanBlue uppercase">Stops</p>
+                                </div>
+                                <div class="w-px h-8 bg-skyBlue hidden md:block"></div>
+                                <div class="text-center">
+                                    <p class="font-bold text-deepBlue text-lg">~${duration} <span class="text-sm font-normal">min</span></p>
+                                    <p class="text-xs text-oceanBlue uppercase">Duration</p>
+                                </div>
+                            </div>
 
-                    <button onclick='openTracking("${bus.id}", "${from}", "${to}")' class="w-full md:w-auto bg-deepBlue hover:bg-oceanBlue text-white font-semibold px-6 py-3 rounded-lg transition shadow-md flex items-center justify-center gap-2 group">
-                        <span>Track Bus</span>
-                        <i class="fa-solid fa-location-dot group-hover:animate-bounce"></i>
-                    </button>
+                            <button onclick='openTracking("${bus.id}", "${from}", "${isSuggestion ? "Kempegowda Bus Station" : to}", ${reverse})' class="w-full md:w-auto bg-deepBlue hover:bg-oceanBlue text-white font-semibold px-6 py-3 rounded-lg transition shadow-md flex items-center justify-center gap-2 group">
+                                <span>Track Bus</span>
+                                <i class="fa-solid fa-location-dot group-hover:animate-bounce"></i>
+                            </button>
+                        </div>
+                    </div>
                 `;
-                return card;
-            };
-
-            // Populate Lists
-            availableBuses.forEach(bus => {
-                // Add to All List
-                allBusList.appendChild(createCard(bus, false));
-                
-                // Add to Upcoming List if applicable
-                if(userMinutes !== -1) {
-                    const upcomingCard = createCard(bus, true);
-                    if(upcomingCard) {
-                        upcomingBusList.appendChild(upcomingCard);
-                    }
-                }
+                busListContainer.appendChild(card);
             });
-            
-            // If upcoming list empty, show msg
-            if(userMinutes !== -1 && upcomingBusList.children.length === 0) {
-                 upcomingBusList.innerHTML = `<div class="text-center p-4 text-gray-500 italic">No more buses scheduled today after this time.</div>`;
-            }
         }
 
         function goBack() {
@@ -719,28 +829,29 @@
             searchView.classList.remove('hidden');
         }
 
-        // --- TRACKING MODAL LOGIC (UPDATED) ---
-        function openTracking(busId, from, to) {
+        // --- TRACKING MODAL LOGIC (UPDATED FOR REVERSE) ---
+        function openTracking(busId, from, to, isReverse) {
             const bus = busRoutes.find(b => b.id === busId);
             if (!bus) return;
 
-            const endStop = bus.stops[bus.stops.length-1];
+            // Determine Stops Order based on direction
+            let stopsToRender = [...bus.stops];
+            if (isReverse) {
+                stopsToRender = stopsToRender.reverse();
+            }
+
+            const endStop = stopsToRender[stopsToRender.length-1];
             document.getElementById('modal-bus-name').innerHTML = `${busId} <span class="text-base font-normal text-gray-500">towards ${endStop}</span>`;
             document.getElementById('tracking-modal').classList.remove('hidden');
 
             const listEl = document.getElementById('modal-stops-list');
             listEl.innerHTML = '';
             
-            // Find Indices for highlighting
-            const startIdx = bus.stops.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
-            const endIdx = bus.stops.findIndex(s => s.toLowerCase().includes(to.toLowerCase()));
+            // Find Indices for highlighting in the *rendered* list
+            const startIdx = stopsToRender.findIndex(s => s.toLowerCase().includes(from.toLowerCase()));
+            const endIdx = stopsToRender.findIndex(s => s.toLowerCase().includes(to.toLowerCase()));
             
-            const minIdx = Math.min(startIdx, endIdx);
-            const maxIdx = Math.max(startIdx, endIdx);
-
-            // --- CRITICAL UPDATE: Calculate REALISTIC Schedule based on Bus Timings ---
-            
-            // 1. Get User Input Time (or Now)
+            // Calculate Next Departure (Simplified)
             let searchTimeMin = 0;
             const timeInputValue = document.getElementById('time-input').value;
             if(timeInputValue) {
@@ -751,11 +862,7 @@
                 searchTimeMin = now.getHours() * 60 + now.getMinutes();
             }
 
-            // 2. Find the NEXT scheduled departure from the list
-            // We convert all bus timings to minutes and find the first one >= searchTimeMin
-            // If none found (late night), we wrap to the first bus of the next day (index 0)
             let nextBusTimeMin = -1;
-            
             for (let t of bus.timings) {
                 const busMin = convertToMinutes(t);
                 if (busMin >= searchTimeMin) {
@@ -763,52 +870,38 @@
                     break;
                 }
             }
+            if (nextBusTimeMin === -1 && bus.timings.length > 0) nextBusTimeMin = convertToMinutes(bus.timings[0]);
 
-            // If no bus found today, use the first bus of tomorrow
-            if (nextBusTimeMin === -1 && bus.timings.length > 0) {
-                nextBusTimeMin = convertToMinutes(bus.timings[0]);
-            }
-
-            // Display "Next Departure" in Modal Header
             const nextDepartureStr = minutesToTimeStr(nextBusTimeMin);
             document.getElementById('modal-next-bus').innerText = nextDepartureStr;
 
-            // 3. Establish Base Time for the Bus at the FIRST Stop (Index 0 of route)
-            // Note: The timings in DB are usually for the starting point.
-            // We assume bus.timings are for index 0.
-            
-            bus.stops.forEach((stop, index) => {
+            // Render Stops
+            stopsToRender.forEach((stop, index) => {
                 const li = document.createElement('li');
                 
-                // Determine styling
                 let isActive = false;
                 let isPast = false;
                 
                 if (startIdx !== -1 && endIdx !== -1) {
-                    if (index >= minIdx && index <= maxIdx) isActive = true;
-                    if (index < minIdx) isPast = true;
+                    if (index >= startIdx && index <= endIdx) isActive = true;
+                    if (index < startIdx) isPast = true;
                 }
                 
-                // --- TIME CALCULATION ---
                 // Assume 4 minutes per stop
                 const minutesFromStart = index * 4; 
                 const arrivalAtStopMin = nextBusTimeMin + minutesFromStart;
-                
-                // Handle day wrap (over 24h = 1440 min)
                 let finalMin = arrivalAtStopMin % 1440;
                 const timeString = minutesToTimeStr(finalMin);
 
-                // Styles
                 const borderClass = isActive ? "border-l-4 border-oceanBlue" : "border-l-2 border-dashed border-gray-200";
                 const bgClass = isActive ? "bg-blue-50 rounded-lg shadow-sm" : "";
                 const textClass = isActive ? "text-deepBlue font-bold text-lg" : (isPast ? "text-gray-400" : "text-gray-600");
                 const opacityClass = isActive ? "opacity-100" : "opacity-60";
                 
-                // Dot
                 let dotHtml = '';
-                if(index === minIdx) {
+                if(index === startIdx) {
                       dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-green-500 ring-4 ring-green-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-play text-[8px] text-white ml-0.5"></i></div>`;
-                } else if(index === maxIdx) {
+                } else if(index === endIdx) {
                       dotHtml = `<div class="absolute -left-[41px] top-5 w-5 h-5 rounded-full bg-red-500 ring-4 ring-red-100 border-2 border-white shadow-md z-10 flex items-center justify-center"><i class="fa-solid fa-flag-checkered text-[8px] text-white"></i></div>`;
                 } else if (isActive) {
                       dotHtml = `<div class="absolute -left-[37px] top-6 w-3 h-3 rounded-full bg-oceanBlue border-2 border-white"></div>`;
@@ -817,7 +910,6 @@
                 }
 
                 li.className = `relative mb-4 last:mb-0 transition-all duration-300`;
-                
                 li.innerHTML = `
                     ${dotHtml}
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 ${bgClass} ${borderClass} ${opacityClass}">
@@ -825,8 +917,8 @@
                             <div class="${textClass}">
                                 ${stop}
                             </div>
-                            ${index === minIdx ? '<span class="inline-block mt-1 text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wide">Boarding Point</span>' : ''}
-                            ${index === maxIdx ? '<span class="inline-block mt-1 text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wide">Drop Location</span>' : ''}
+                            ${index === startIdx ? '<span class="inline-block mt-1 text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wide">Boarding Point</span>' : ''}
+                            ${index === endIdx ? '<span class="inline-block mt-1 text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded-full font-bold uppercase tracking-wide">Drop Location</span>' : ''}
                         </div>
                         <div class="mt-2 sm:mt-0 sm:ml-4 text-right min-w-[80px]">
                             <div class="text-xs text-gray-400 uppercase tracking-wider mb-0.5">Approx</div>
@@ -839,11 +931,9 @@
                 listEl.appendChild(li);
             });
 
-            // Construct Google Maps URL
             const origin = encodeURIComponent(from + ", Bangalore, Karnataka");
             const destination = encodeURIComponent(to + ", Bangalore, Karnataka");
             const gmapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=transit`;
-            
             document.getElementById('gmaps-link').href = gmapsUrl;
         }
 
