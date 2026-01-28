@@ -255,8 +255,28 @@
             // --- SOUTH BANGALORE (JP Nagar, Jayanagar, BTM) ---
             { 
                 id: "215H", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Lalbagh Main Gate", "South End Circle", "Jayanagar 4th Block", "Jayanagar 5th Block", "Jaya Prakash Nagar 1st Phase", "Jaya Prakash Nagar 6th Phase", "Puttenahalli", "Konanakunte Cross", "Jambu Savari Dinne"], 
-                timings: generateTimings(6, 22, 10)
+                stops: ["Kempegowda Bus Station", "Corporation Circle", "Lalbagh Main Gate", "South End Circle","Jayanagar", "Jayanagar 4th Block", "Jayanagar 5th Block", "Jaya Prakash Nagar", "Jaya Prakash Nagar 6th Phase", "RBI Layout", "Konanakunte Cross","BK Circle", "Jambu Savari Dinne"], 
+                timings: generateTimings(6, 22, 13)
+            },
+            { 
+                id: "15G", type: "Ordinary", 
+                stops: ["2nd stage Kumaraswamy Layout","Kumaraswamy Layout","Dayananda Sagar College","Yarab Nagar","Basavanagudi PS","National College","K R Market","Mysore Bank","Kempegowda Bus Station"], 
+                timings: generateTimings(5, 21, 40)
+            },
+            { 
+                id: "15E", type: "Ordinary", 
+                stops: ["Kumaraswamy Layout","Dayananda Sagar College","Yarab Nagar","MM Industries","Basavanagudi PS","National College","K R Market","Mysore Bank","Kempegowda Bus Station"], 
+                timings: generateTimings(5, 21, 22)
+            },
+            { 
+                id: "13A", type: "Ordinary", 
+                stops: ["Shivajinagara","Chinnaswamy Stadium","Shanthinagara TTMC","Ashoka Pillar","Jayanagar 4th Block","Banashankari","Kaveri Nagara","Dayananda Sagar College","Kumaraswamy Layout","2nd stage Kumaraswamy Layout"], 
+                timings: generateTimings(6, 21, 25)
+            },
+           { 
+                id: "13C", type: "Ordinary", 
+                stops: ["Kumaraswamy Layout","Kumaraswamy Layout PS","Dayananda Sagar College","Kaveri Nagara","Banashankari","Jayanagar","Ashoka Pillar","Wilson Garden","Shanthinagara TTMC","MG Road","Shivajinagara"], 
+                timings: generateTimings(6, 21, 20)
             },
             {
                 id: "201", type: "Ordinary",
@@ -270,52 +290,65 @@
             },
             {
                 id: "365", type: "Ordinary",
-                stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "Gurappanapalya", "Jayadeva Hospital", "Bilekahalli", "Apollo Hospital", "Hulimavu", "Meenakshi Temple", "Gottigere", "Bannerughatta National Park"],
+                stops: ["Kempegowda Bus Station", "Corporation Circle", "Shanthinagara TTMC", "Dairy Circle", "Gurappanapalya", "Jayadeva Hospital", "Bilekahalli", "Apollo Hospital", "Hulimavu", "Meenakshi Temple", "Gottigere", "Bannerughatta National Park"],
                 timings: generateTimings(6, 21, 8)
             },
              { 
                 id: "25A", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "BTM Layout"], 
+                stops: ["Kempegowda Bus Station","K R Circle", "Corporation Circle", "Lalbagh Main Gate","Ashoka Pillar","Jayanagar 4th Block","Jayanagar","Shanthinagara TTMC", "BTM Layout"], 
                 timings: generateTimings(7, 21, 8) 
             },
+           { 
+                id: "237C", type: "Ordinary", 
+                stops: ["bande Maramma","Ramakrishnappa Layout","Prashanth Nagara","Manuvana","Magadi Road","Kempegowda Bus Station","Vidhana Soudha","Ghousia Hospital","Shivajinagara"], 
+                timings: generateTimings(7, 20, 46) 
+            },
+           { 
+                id: "210AA", type: "Ordinary", 
+                stops: ["Iskcon Temple Maruthinagara","ISRO Layout","Kumaraswamy Layout","Kumaraswamy Layout PS","Dayananda Sagar College","Banashankari","MM Industries","Basavanagudi","National College","K R Market","Mysore Bank","Kempegowda Bus Station"], 
+                timings: generateTimings(8, 18, 55)
+            },
+          { 
+                id: "210G", type: "Ordinary", 
+                stops: ["Vasanthapura","ISRO Layout","Kumaraswamy Layout","Kumaraswamy Layout PS","Dayananda Sagar College","Kaveri Nagara","Banashankari","Jayanagar","Madhavan Park","Ashoka Pillar","Wilson Garden","Shanthinagara TTMC","st Joseph College","MG Road","Shivajinagara"], 
+                timings: generateTimings(9, 19, 16)
+            },
+          
+          
 
             // --- CENTRAL & EAST (Koramangala, Indiranagar, Whitefield) ---
              { 
                 id: "171", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Wilson Garden", "Dairy Circle", "Koramangala 1st Block", "Koramangala 5th Block", "Koramangala 80ft Road", "Koramangala TTMC"], 
+                stops: ["Kempegowda Bus Station","K R Circle","B S P Kalinga Rao Road","Shanthinagara TTMC", "Wilson Garden", "Dairy Circle", "Forum Mall Bus Stop","Koramangala 1st Block", "Koramangala 5th Block",  "Koramangala TTMC","Koramangala Water Tank","Jaya Prakash Nagar"], 
                 timings: generateTimings(6, 22, 12) 
             },
-            { 
-                id: "333E", type: "Volvo AC", 
-                stops: ["Kempegowda Bus Station", "Corporation", "Richmond Circle", "Domlur", "HAL Main Gate", "Marathahalli", "Kundalahalli", "Whitefield", "Kadugodi"], 
-                timings: generateTimings(6, 22, 8)
-            },
+            
             {
-                id: "335E", type: "Volvo AC",
-                stops: ["Kempegowda Bus Station", "Corporation", "Richmond Circle", "Mayo Hall", "Domlur", "HAL Main Gate", "HAL Kalyana Mantapa", "Marathahalli", "Kundalahalli Gate", "Varthur Kodi", "Hope Farm", "Kadugodi"],
-                timings: generateTimings(6, 23, 10)
+                id: "335G", type: "Ordinary",
+                stops: ["BEML Layout","Havanur Circle","Industrial Town","Rajaji Nagar","Kempegowda Bus Station", "K R Circle", "Mallaya Hospital", "Mayo Hall", "Domlur", "HAL Main Gate", "HAL Kalyana Mantapa", "Marathahalli", "Kundalahalli Gate", "White Field", "Hope Farm", "Kadugodi"],
+                timings: generateTimings(7, 19, 55)
             },
             { 
                 id: "300H", type: "Ordinary", 
                 stops: ["Kempegowda Bus Station", "Shivajinagara", "Ulsoor", "Indiranagar", "Byappanahalli", "K R Puram"], 
-                timings: generateTimings(7, 20, 15) 
+                timings: generateTimings(7, 20, 12) 
             },
 
             // --- NORTH & WEST (Malleshwaram, Rajajinagar, Vijayanagar, Yelahanka) ---
             { 
                 id: "276", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Central Talkies", "Malleshwaram 11th Cross", "Malleshwaram 18th Cross", "Tata Institute (IISc)", "Yeshawanthapura TTMC", "Mathikere", "Gokula", "BEL Circle", "Vidyaranyapura"], 
-                timings: generateTimings(6, 22, 10) 
+                stops: ["K R Market","Kempegowda Bus Station","Mantri Mall","Malleshwaram Circle", "Malleshwaram 11th Cross", "Malleshwaram 18th Cross", "Tata Institute (IISc)", "Yeshawanthapura TTMC", "Mathikere", "Gokula", "BEL Circle","Chamundeshwari Layout", "Vidyaranyapura"], 
+                timings: generateTimings(9, 20, 55) 
             },
             { 
-                id: "258C", type: "Ordinary", 
-                stops: ["Kempegowda Bus Station", "Sujatha Talkies", "Rajajinagar 1st Block", "Navrang", "Yeshawanthapura TTMC", "Govardhan Talkies", "Jalahalli Cross", "Peenya", "Dasarahalli", "Nagasandra", "Nelamangala"], 
-                timings: generateTimings(5, 22, 8) 
+                id: "258", type: "Ordinary", 
+                stops: ["K R Market","Kempegowda Bus Station", "Malleshwaram Circle", "Rajajinagar 1st Block", "Yeshawanthapura TTMC", "Govardhan Talkies", "Peenya","Jalahalli Cross", "Dasarahalli", "Nagasandra","Madavara","Madanayakanahalli","Dasanapura","Binnamangala", "Nelamangala"], 
+                timings: generateTimings(5, 19, 8) 
             },
              { 
                 id: "401K", type: "Ordinary", 
                 stops: ["Yelahanka New Town", "Yelahanka", "Hebbala", "BEL Circle", "Mathikere", "Yeshawanthapura TTMC", "Rajajinagar 1st Block", "Vijayanagara TTMC", "Attiguppe", "Nayandahalli", "Kengeri TTMC"], 
-                timings: generateTimings(6, 21, 15) 
+                timings: generateTimings(6, 21, 13) 
             },
             {
                 id: "226N", type: "Ordinary",
@@ -339,9 +372,67 @@
             {
                 id: "356M", type: "Ordinary",
                 stops: ["Kempegowda Bus Station", "Corporation", "Shanthinagara TTMC", "Dairy Circle", "Madiwala", "Central Silk Board", "Roopena Agrahara", "Bommanahalli", "Garvebhavipalya", "Kudlu Gate", "Singasandra", "Hosa Road", "Electronic City", "Veerasandra", "Hebbagodi", "Bommasandra", "Chandapura", "Anekal"],
-                timings: generateTimings(5, 22, 6)
+                timings: generateTimings(6, 22, 18)
             },
 
+           // --- BANASHANKARI ---
+           {
+                id: "12", type: "Ordinary",
+                stops: ["Banashankari","Jayanagar 8th Block","Vijaya College","Lalbagh","Town Hall","Kempegowda Bus Station"],
+                timings: generateTimings(6, 22, 10)
+            },
+          {
+                id: "13", type: "Ordinary",
+                stops: ["Banashankari","Jayanagar 4th Block","Jayanagar","Ashoka Pillar","Wilson Garden","Shanthinagara TTMC","st Joseph College","MG Road","Shivajinagara"],
+                timings: generateTimings(6, 22, 12)
+            },
+          {
+                id: "13B", type: "Ordinary",
+                stops: ["Shivajinagara","Chinnaswamy Stadium","st Joseph's University","Shanthi Nagar","Lalbagh","Ashoka Pillar","Jayanagar","Jayanagar 4th Block","Banashankari","Kaveri Nagar","Padmanabha Nagar"],
+                timings: generateTimings(7, 18, 23)
+            },
+           {
+                id: "13E", type: "Ordinary",
+                stops: ["Sri Vidyanagara","Hoskerehalli Cross","Kamkya","Kadirenalli Cross","Banashankari","Jayanagar","Madhavan Park","Ashoka Pillar","Wilson Garden","Shanthinagara TTMC","st Joseph College","MG Road","Shivajinagara"],
+                timings: generateTimings(7, 17, 25)
+            },
+          {
+                id: "13H", type: "Ordinary",
+                stops: ["Shivajinagara","Chinnaswamy Stadium","st Joseph's University","Shanthinagara TTMC","Lalbagh","Ashoka Pillar","Jayanagar 3rd Block","Jayanagar","Jayanagar 4th Block","Banashankari","Kamakya","Ittamadu Cross","AGS Layout"],
+                timings: generateTimings(8, 19, 53)
+            },
+          {
+                id: "13J", type: "Ordinary",
+                stops: ["Shivajinagara","Chinnaswamy Stadium","st Joseph's University","Shanthinagara TTMC","Lalbagh","Ashoka Pillar","Jayanagar 3rd Block","Jayanagar","Jayanagar 4th Block","Banashankari","Kaveri Nagar","Kadirenahalli Cross","Kamakya","Hoskerehalli"],
+                timings: generateTimings(9, 17, 56)
+            },
+          {
+                id: "13K", type: "Ordinary",
+                stops: ["Shivajinagara","Chinnaswamy Stadium","Shanthinagara TTMC","Lalbagh","Ashoka Pillar","Jayanagar 3rd Block","Jayanagar","Jayanagar 4th Block","Banashankari","Kaveri Nagar","Kadirenahalli Cross","Minaznagara"],
+                timings: generateTimings(9, 17, 49)
+            },
+           {
+                id: "201G", type: "Ordinary",
+                stops: ["Banashankari","Jayanagar 5th Block","Jayanagar","MICO Layout","BTM Layout Water Tank","BTM Layout","Central Silk Board","Koramangala BDA Complex","Koramangala","Military Bridge","Doopanahalli","Indira Nagar 12th Main","Indira Nagar","Indira Nagar PS","Kodihalli","Jeevanbheema Nagar"],
+                timings: generateTimings(4, 19, 22)
+            },
+          {
+                id: "210B", type: "Ordinary",
+                stops: ["Chunchaghatta","Ganapathipura","Yelachenahalli","Jaya Prakash Nagar","Banashankari","MM Industries","Basavanagudi PS","National College","K R Market","Town Hall","Kempegowda Bus Station"],
+                timings: generateTimings(6, 18, 54)
+            },
+          {
+                id: "210E", type: "Ordinary",
+                stops: ["Vasanthapura","Uttarahalli","Chikkallasandra","Kadirenahalli Cross","Banashankari","Yediyur","Jayanagar 6th Block","South End Circle","Basappa Circle","Town Hall","Kempegowda Bus Station"],
+                timings: generateTimings(5, 20, 28)
+            },
+          {
+                id: "211", type: "Ordinary",
+                stops: ["Somanahalli","APS College","Gandhi Nagar","Kaggalipura","udipalya","Lakshmipura","Agara Cross","Silk Institute","Thalagattapura","Raghuvanahalli Cross","Doddakallasandra","Konanakunte Cross","Yelachenahalli","Jaya Prakash Nagar","Banashankari","Jayanagar 6th Block","South End Circle","Basappa Circle","K R Market"],
+                timings: generateTimings(6, 18, 53)
+            },
+          
+          
             // --- AIRPORT (KIA) ---
             { 
                 id: "KIA-4", type: "Vayu Vajra", 
